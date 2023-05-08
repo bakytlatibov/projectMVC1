@@ -43,8 +43,9 @@ public class JpaConfig {
     public JpaVendorAdapter getJpaVendorAdapter() {
         return new HibernateJpaVendorAdapter();
     }
+
     @Bean
-    public DataSource getDataSource(){
+    public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(environment.getProperty("db.driverClassName"));
         dataSource.setUrl(environment.getProperty("db.url"));
@@ -52,20 +53,19 @@ public class JpaConfig {
         dataSource.setPassword(environment.getProperty("db.password"));
         return dataSource;
     }
+
     @Bean
-    public PlatformTransactionManager transactionManager(){
+    public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager
                 (Objects.requireNonNull(getEntityManagerFactoryBean().getObject()));
     }
 
-    public Properties getProperties(){
+    public Properties getProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect",environment.getProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql",environment.getProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql",environment.getProperty("hibernate.format_sql"));
-        properties.put("hibernate.hbm2ddl.auto",environment.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+        properties.put("hibernate.format_sql", environment.getProperty("hibernate.format_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
-
-
 }
